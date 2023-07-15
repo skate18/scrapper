@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile.nginx
     ports:
       - '8081:80'
-    depends_on:
-      - php
+    volumes:
+      - ./public:/var/www/html/public
 
   php:
     build:
