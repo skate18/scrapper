@@ -1,30 +1,21 @@
-var data = [
-    {
-        "name":       "Tiger Nixon",
-        "position":   "System Architect",
-        "salary":     "$3,120",
-        "start_date": "2011/04/25",
-        "office":     "Edinburgh",
-        "extn":       "5421"
-    },
-    {
-        "name":       "Garrett Winters",
-        "position":   "Director",
-        "salary":     "$5,300",
-        "start_date": "2011/07/25",
-        "office":     "Edinburgh",
-        "extn":       "8422"
-    }
-]
-
 let actions = {
     showCompanyData: function () {
         var table = $('#myTable').DataTable({
-            data: data,
+            ajax: {
+                url: '/companies',
+                dataSrc: ''
+            },
             columns: [
                 { title: "Name", data : "name" },
-                { title: "Position", data : "position" },
-                { title: "Salary", data : "salary" },
+                { title: "Registration Code", data : "registrationCode" },
+                { title: "Address", data : "address" },
+                { 
+                    title: 'Actions',
+                    render: (data,type,row) => {
+                      return `<span role="button" class='p-2 mr-2 edit' data-id='${row.id}' title='Edit'><i class="fas fa-edit"></i> <span>
+                      <span role="button" class='p-2 delete' data-id='${row.id}' title='Delete'><i class="fas fa-trash"></i> <span>`;
+                    }
+                 }
             ]
         });
          console.log(table);
