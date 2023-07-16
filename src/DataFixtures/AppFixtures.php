@@ -15,6 +15,7 @@ class AppFixtures extends Fixture
             $company->setName('Test Company ' . $i);
             $company->setRegistrationCode(mt_rand(103341878, 903341878));
             $company->setAddress("Test address " . $i);
+            $company->setCreatedAt(new \DateTimeImmutable());
             $manager->persist($company);
         }
         $manager->flush();

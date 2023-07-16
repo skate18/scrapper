@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Scrapper{% endblock %}
 
 {% block body %}
 
-    <div class=" pt-3">
+    <div class=" pt-4">
         <div class="container py-4 shadow bg-white">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
@@ -12,10 +12,10 @@
                         <label for="registration_code" class="form-label">{{ 'Registration code'|trans }}</label>
                         <input type="text" class="form-control" id="registration_code" placeholder="{{ 'Enter registration code here'|trans }}">
                     </div>
-                    <button type="submit" class="btn btn-primary">
-                        {{ 'Scrap'|trans }}
+                    <button type="submit" id="scrape" class="btn btn-primary">
+                        {{ 'Scrape'|trans }}
                     </button>
-                    <button type="submit" class="btn btn-secondary ms-3">
+                    <button type="submit" id="add-test-data" class="btn btn-secondary ms-3">
                         {{ 'Add a Test data'|trans }}
                     </button>
                 </div>
@@ -23,19 +23,34 @@
         </div>
     </div>
 
+    <div class="my-5">
+        <div class="container py-4 shadow bg-white">
+            <div class="row">
+                <div class="col-">
+                    <table id="myTable" class="display">
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/daniel/Docker/NordStreet/FINAL/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/daniel/Docker/NordStreet/FINAL/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+    
+{% endblock %}
+
+
+{% block pagestyles %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block pagescripts %}
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+<script src="{{ asset('build/datatable.js') }}"></script>
 {% endblock %}
