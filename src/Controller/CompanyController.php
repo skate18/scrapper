@@ -61,4 +61,34 @@ class CompanyController extends AbstractController
 
         return new JsonResponse($json);
     }
+
+    #[Route('/companies/{id}/show', name: 'app_companies_show', methods: ['POST'])]
+    public function show(EntityManagerInterface $entityManager, int $id): JsonResponse
+    {
+        $json = ['success' => false];
+
+        $company = $entityManager->getRepository(Company::class)->find($id);
+
+        if ($company) {
+            
+            $json = ['success' => true];
+        } 
+
+        return new JsonResponse($json);
+    }
+
+    #[Route('/companies/{id}/edit', name: 'app_companies_edit', methods: ['POST'])]
+    public function edit(EntityManagerInterface $entityManager, int $id): JsonResponse
+    {
+        $json = ['success' => false];
+
+        $company = $entityManager->getRepository(Company::class)->find($id);
+
+        if ($company) {
+            
+            $json = ['success' => true];
+        } 
+
+        return new JsonResponse($json);
+    }
 }

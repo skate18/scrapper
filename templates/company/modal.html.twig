@@ -1,0 +1,27 @@
+<div class="modal fade"
+     id="scrapper-modal"
+     tabindex="-1"
+     aria-labelledby="scrapper-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="scrapper-modal-label"></h5>
+            </div>
+            <div class="modal-body" id="scrapper-modal-content">
+                The content
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modal-btn-close" class="btn btn-secondary" data-bs-dismiss="modal"></button>
+                <button type="button" id="modal-btn-update" class="btn btn-primary d-none">
+                    {{ 'Save'|trans }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const TITLE_EDIT = "{{ 'Edit Data'|trans }}";
+    const BUTTON_CLOSE = "{{ 'Close'|trans }}";
+    const BUTTON_OK = "{{ 'Ok'|trans }}";
+</script>
