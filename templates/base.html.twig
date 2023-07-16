@@ -9,6 +9,7 @@
     {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
     {% endblock %}
+    {% block pagestyles %}{% endblock %}
 
 </head>
 <body>
@@ -127,5 +128,6 @@
     {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
     {% endblock %}
+    {% block pagescripts %}{% endblock %}
 </body>
 </html>
