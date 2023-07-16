@@ -41,6 +41,29 @@ let actions = {
             });
         });
     },
+    delete: function () {
+        $('body').on('click', '.delete', function(){
+            let id  = $(this).data('id');
+            if(confirm("Are you sure you want to permanently delete this data?")){
+                $.ajax({
+                    url: '/companies/' + id +'/delete',
+                    type: 'POST',
+                    success: function(response) {
+                        if(response.success){
+                            actions.showCompanyData();
+                            iziToast.success({
+                                title: 'Success',
+                                message: 'Company data has been deleted successfully',
+                                position: 'topCenter'
+                            });
+                        }else{
+                            actions.showErrorMessage();
+                        }
+                    }
+                });
+            }
+        });
+    },
     showErrorMessage: function () {
         iziToast.error({
             title: 'Error',
@@ -54,4 +77,5 @@ $(function() {
     actions.showCompanyData();
     actions.scrape();
     actions.addTestData();
+    actions.delete();
 });

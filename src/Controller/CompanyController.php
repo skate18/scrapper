@@ -45,4 +45,20 @@ class CompanyController extends AbstractController
 
         return new JsonResponse($json);
     }
+
+    #[Route('/companies/{id}/delete', name: 'app_companies_delete', methods: ['POST'])]
+    public function delete(EntityManagerInterface $entityManager, int $id): JsonResponse
+    {
+        $json = ['success' => false];
+
+        $company = $entityManager->getRepository(Company::class)->find($id);
+
+        if ($company) {
+            $entityManager->remove($company);
+            $entityManager->flush();
+            $json = ['success' => true];
+        } 
+
+        return new JsonResponse($json);
+    }
 }
