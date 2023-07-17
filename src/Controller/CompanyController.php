@@ -70,8 +70,14 @@ class CompanyController extends AbstractController
         $company = $entityManager->getRepository(Company::class)->find($id);
 
         if ($company) {
+            $html = $this->renderView('company/show.html.twig', [
+                'company' => $company,
+            ]);
             
-            $json = ['success' => true];
+            $json = [
+                'success' => true, 
+                'html' => $html
+            ];
         } 
 
         return new JsonResponse($json);

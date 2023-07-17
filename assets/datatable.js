@@ -35,9 +35,10 @@ let actions = {
                 type: 'POST',
                 success: function(response) {
                     if(response.success){
-                        $('#scrapper-modal-label').text("My Data show");
+                        $('#scrapper-modal-label').text(TITLE_COMPANY_DETAILS);
                         $('#modal-btn-close').text(BUTTON_OK);
                         $('#modal-btn-update').addClass('d-none');
+                        $('#scrapper-modal-content').html(response.html);
                         $('#scrapper-modal').modal('show');
                     }else{
                         actions.showErrorMessage();
