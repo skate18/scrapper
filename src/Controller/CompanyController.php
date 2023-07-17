@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\HttpFoundation\Request;
 
 class CompanyController extends AbstractController
 {
@@ -92,7 +93,38 @@ class CompanyController extends AbstractController
 
         if ($company) {
             
-            $json = ['success' => true];
+            $html = $this->renderView('company/edit.html.twig', [
+                'company' => $company,
+            ]);
+            
+            $json = [
+                'success' => true, 
+                'html' => $html
+            ];
+        } 
+
+        return new JsonResponse($json);
+    }
+
+    #[Route('/companies/{id}/update', name: 'app_companies_update', methods: ['POST'])]
+    public function update(Request $request, EntityManagerInterface $entityManager, int $id): JsonResponse
+    {
+        $json = ['success' => false];
+
+        $company = $entityManager->getRepository(Company::class)->find($id);
+
+        if ($company) {
+            $params = $request->request->all();
+            $company->setName($params['name']);
+            $company->setRegistrationCode($params['registrationCode']);
+            $company->setVat($params['vat']);
+            $company->setAddress($params['address']);
+            $company->setPhone($params['phone']);
+            $entityManager->flush();
+            
+            $json = [
+                'success' => true, 
+            ];
         } 
 
         return new JsonResponse($json);
