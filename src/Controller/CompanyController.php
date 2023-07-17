@@ -11,6 +11,8 @@ use Exception;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Component\HttpClient\HttpClient;
 
 class CompanyController extends AbstractController
 {
@@ -126,6 +128,35 @@ class CompanyController extends AbstractController
                 'success' => true, 
             ];
         } 
+
+        return new JsonResponse($json);
+    }
+
+    #[Route('/scrape', name: 'app_scrape', methods: ['POST'])]
+    public function scrape(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $json = ['success' => false];
+        $params = $request->request->all();
+
+        // TRY 1.
+        $client = HttpClient::create();
+        $browser = new HttpBrowser($client);
+        $baseUrl = 'https://rekvizitai.vz.lt';
+        $url = '/en/company-search/1/';
+        $parameters = [
+            'code' => $params['code'],
+        ];
+        $crawler = $browser->request('POST', $baseUrl . $url, $parameters);
+
+        /**
+         * But the above request fails due to the Cloudflare Waiting Room.
+         */
+
+         // TRY 2.
+         // After conducting extensive research on the internet, I came across various 
+         // web scraping services, such as https://scrapfly.io/. However, I encountered issues 
+         // with their services as they were unable to scrape any data successfully.
+        
 
         return new JsonResponse($json);
     }
