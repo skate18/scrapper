@@ -24,7 +24,42 @@ let actions = {
     },
     scrape: function () {
         $('body').on('click', '#scrape', function(){
-            console.log('CLicked for scraping');
+            let code = $('#registration_code').val();
+
+            if(code == ''){
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Please enter registration code.',
+                    position: 'topCenter'
+                });
+                return false;
+            }else if(code && code.length < 5){ // 9
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Please enter a valid registration code.',
+                    position: 'topCenter'
+                });
+                return false;
+            }
+            
+            $.ajax({
+                url: '/scrape',
+                type: 'POST',
+                data: {code : code},
+                success: function(response) {
+                    console.log(response);
+                    if(response.success){
+                        actions.showCompanyData();
+                        iziToast.success({
+                            title: 'Success',
+                            message: 'Data scraped successfully.',
+                            position: 'topCenter'
+                        });
+                    }else{
+                        actions.showErrorMessage();
+                    }
+                }
+            });
         });
     },
     show: function () {
