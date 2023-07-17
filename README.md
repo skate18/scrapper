@@ -31,3 +31,21 @@ Wait for the process to finish. Once it's completed, you can access the applicat
 http://localhost:8081
 
 
+Screenshots
+---------------
+During the development process, I have included several screenshots to provide visual references.
+
+![Starting ](./screenshots/1. barebone_bootstrap_theme.png)
+
+![Search bar](./screenshots/2. search_bar.png)
+
+![Company lists](./screenshots/4. company_list_with_pagination.png)
+
+![Details view](./screenshots/5. details_view.png)
+
+![Edit ](./screenshots/6. edit_data.png)
+
+
+
+
+
